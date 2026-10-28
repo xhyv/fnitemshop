@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DropBazaar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c1e">
+  <meta name="description" content="Unofficial fan-made viewer for the current Fortnite Item Shop.">
+
+  <!-- iPhone "install as app" settings -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DropBazaar">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="ptr" class="ptr" aria-hidden="true"><span id="ptrText">Pull to refresh</span></div>
+
+  <!-- Dark top bar -->
+  <nav class="nav">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">DropBazaar</span>
+    </div>
+    <div class="nav-actions">
+      <button id="aboutBtn" class="nav-btn gray" aria-label="Settings and about">About</button>
+      <button id="refreshBtn" class="nav-btn yellow" aria-label="Refresh shop">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
+        <span class="lbl">Refresh</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Side rail (desktop only): filter shortcut + one dot per shop section -->
+  <aside id="rail" class="rail" hidden>
+    <button id="railFilter" class="rail-filter" aria-label="Go to search and filters">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 7h14M8 12h8M11 17h2"/></svg>
+    </button>
+    <div id="railDots" class="rail-dots"></div>
+  </aside>
+
+  <div class="page">
+    <header class="hero">
+      <div class="hero-text">
+        <h1>Item Shop</h1>
+        <div class="hero-sub">Unofficial fan app &middot; data from fortnite-api.com</div>
+      </div>
+      <div class="pill-blue">Resets in <b id="countdown">--:--:--</b></div>
+    </header>
+
+    <div class="tools">
+      <input id="search" type="search" placeholder="Search items, bundles..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+      <label class="select-wrap"><select id="typeFilter" aria-label="Filter by item type"><option value="">All types</option></select></label>
+      <label class="select-wrap"><select id="rarityFilter" aria-label="Filter by rarity"><option value="">All rarities</option></select></label>
+      <button id="resetFilters" class="chip-btn" hidden>Clear</button>
+    </div>
+
+    <div id="banner" class="banner" hidden></div>
+
+    <main id="shop" class="shop" aria-live="polite"></main>
+
+    <footer class="foot">
+      <div id="meta"></div>
+      <div>Unofficial fan app. Not affiliated with Epic Games.</div>
+    </footer>
+  </div>
+
+  <!-- Item detail sheet -->
+  <div id="sheet" class="sheet" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <div class="sheet-body" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <button class="sheet-close" data-close aria-label="Close">&times;</button>
+      <div id="sheetContent"></div>
+    </div>
+  </div>
+
+  <!-- About / settings sheet -->
+  <div id="about" class="sheet" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <div class="sheet-body" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+      <button class="sheet-close" data-close aria-label="Close">&times;</button>
+      <div class="about">
+        <h2 id="aboutTitle">About DropBazaar</h2>
+        <p><b>Unofficial fan app. Not affiliated with, endorsed by, or sponsored by Epic Games.</b> Fortnite and all related names and images belong to Epic Games, Inc.</p>
+        <p>Shop data and item images come from the free <span class="mono">fortnite-api.com</span> service. This app only displays what that service provides.</p>
+        <p>Prices are in V-Bucks. The shop resets every day at 00:00 UTC (01:00 or 02:00 in the Netherlands).</p>
+        <dl class="kv">
+          <dt>Last updated</dt><dd id="aboutUpdated">never</dd>
+          <dt>Version</dt><dd id="aboutVersion"></dd>
+        </dl>
+        <div class="about-actions">
+          <button id="clearData" class="btn">Clear saved shop &amp; cache</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
