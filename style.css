@@ -18,15 +18,16 @@
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-l: env(safe-area-inset-left, 0px);
   --safe-r: env(safe-area-inset-right, 0px);
-  --head-font: "Segoe UI Black", "Avenir Next", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  --site-font: "Burbank Big Condensed Black", "Burbank Big Condensed", Impact, sans-serif;
+  --head-font: var(--site-font);
 }
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: var(--site-font) !important; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--site-font);
   min-height: 100vh;
   overscroll-behavior-y: contain;
   -webkit-font-smoothing: antialiased;
@@ -42,7 +43,7 @@ body {
 body.locked { overflow: hidden; }
 [hidden] { display: none !important; }
 button, select, input { font: inherit; color: inherit; }
-.mono { font-family: ui-monospace, Menlo, monospace; }
+.mono { font-family: var(--site-font) !important; }
 
 /* ---------- Top bar ---------- */
 .nav {
